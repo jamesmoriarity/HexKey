@@ -1,0 +1,140 @@
+html{
+  color:grey;
+}
+
+div {
+  box-sizing:border-box;
+}
+
+button {
+  margin:5px;
+}
+
+input {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  margin: 0;
+  margin-top: 3px;
+  text-align:center;
+  font-size: 27px;
+  background:none;
+  outline-width: 0;
+  color:#666;
+}
+input.middle:focus {}
+
+#sudoku_solver_shell  {}
+#grid {
+  /* -- width: 700px; --*/
+  margin: 30px;
+  /* border: 3px solid grey; */
+  display: inline-block
+}
+
+.cell_shell{
+  position:relative;
+  margin: 0px;
+  margin-left: -1px;
+  width: 44.3px;
+  height: 40px;
+  overflow: hidden;
+  border: 1px solid grey;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  display:inline-block;
+  text-align:center;
+}
+
+.cell_shell.patternmap_background{
+  background-color:#e8f1f3;
+}
+
+.cell_shell.patternmap_same{
+  background-color: #c3d9e6;
+}
+
+.cell_shell.patternmap_hinted{
+  background-color:#eeffcc;
+}
+
+.cell_shell.selected, .cell_shell.selected.patternmap_background {
+  background-color:#fbe69b;
+}
+
+.valueDiv{
+  position: absolute;
+  display:none;
+  width: 100%;
+  height:inherit;
+  font-family: helvetica;
+  font-size:28px;
+  align-items : center;
+  justify-content: center;
+}
+
+.hasValue .valueDiv{
+  display:flex;
+}
+
+.marks{
+  display:flex;
+  position: absolute;
+  width:100%;
+}
+
+.pencilDiv{
+  font-size: 11px;
+  text-align: left;
+  padding: 2px;
+  position: absolute;
+  width:100%;
+}
+
+.centerDiv{
+  font-size: 13px;
+  text-align: center;
+  padding: 2px;
+  position: absolute;
+  top:14px;
+  width:100%;
+}
+
+.hasValue .marks{
+  display:none
+}
+
+.highlight_button{
+  border:2px solid orange;
+}
+
+.invalidCell{
+  background-color:red;
+}
+.invalidCell input{
+  color:white;
+}
+.hintedCell, .hintedCell.row-bottom, .hintedCell.row-top, .hintedCell.column-right, .hintedCell.column-left{
+  border-width:3px;
+  border-top-color: #62d5e2;
+  border-bottom-color: #62d5e2;
+  border-left-color: #62d5e2;
+  border-right-color: #62d5e2;
+}
+
+.hintedCell input{
+  color:#237179;
+}
+
+.hintValueRelatedCell{
+  background-color:#d3faff;;
+}
+.hintBackgroundCell{
+  background-color:#eeeeee;
+}
+.column-right{
+  border-right:3px solid grey;
+}
+.row-bottom{
+  border-bottom:3px solid grey;
+}
