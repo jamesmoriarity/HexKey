@@ -1,0 +1,37 @@
+
+<svg width="128" height="140" viewBox="0 0 32 35" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(10, 10)">
+  <path d="M15.8 32.6 2.7 25V10l13.1-7.6L28.9 10V25z" fill="#afafaf" fill-opacity=".2" stroke="#000" stroke-width=".2"/>
+  <g transform="translate(-13.6 -2.5)">
+    <circle cx="29.5" cy="5.1" r="2.5" fill="#e6e6e6" stroke="#000" stroke-width=".1"/>
+    <text font-family="sans-serif" font-size="10.3" stroke-width=".3" style="line-height:1.25" xml:space="preserve">
+    <tspan x="28.3" y="6.6" font-size="3.8">F</tspan>
+    </text>
+  </g>
+  <g transform="translate(-52 .6)">
+    <ellipse cx="54.9" cy="9" rx="2.8" ry="2.5" fill="#e6e6e6" stroke="#000" stroke-width=".1"/>
+    <text transform="scale(1.0246 .97603)" x="52.2" y="10.5" font-family="sans-serif" font-size="10.3" stroke-width=".3" style="line-height:1.25" xml:space="preserve"><tspan x="52.2" y="10.5" font-size="3.8">G</tspan></text>
+  </g>
+  <g transform="translate(-72.4 16.4)">
+    <ellipse cx="75.2" cy="7.8" rx="2.8" ry="2.5" fill="#e6e6e6" stroke="#000" stroke-width=".1"/>
+    <text transform="scale(1.0246 .97603)" x="72" y="9.3" font-family="sans-serif" font-size="10.3" stroke-width=".3" style="line-height:1.25" xml:space="preserve"><tspan x="72" y="9.3" font-size="3.8">A</tspan></text>
+  </g>
+  <g transform="translate(-63.8 2.6)">
+    <ellipse cx="92.7" cy="6.9" rx="2.8" ry="2.5" fill="#e6e6e6" stroke="#000" stroke-width=".1"/>
+    <text transform="scale(1.0246 .97603)" x="88.6" y="8.5" font-family="sans-serif" font-size="10.3" stroke-width=".3" style="line-height:1.25" xml:space="preserve"><tspan x="88.6" y="8.5" font-size="3.8">B<tspan font-size="2.8">b</tspan></tspan></text>
+  </g>
+  <g transform="translate(-57.5 39.5)">
+    <ellipse cx="73.4" cy="-7.3" rx="2.8" ry="2.5" fill="#e6e6e6" stroke="#000" stroke-width=".1"/>
+    <text transform="scale(1.0246 .97603)" x="70.2" y="-6.2" font-family="sans-serif" font-size="10.3" stroke-width=".3" style="line-height:1.25" xml:space="preserve"><tspan x="70.2" y="-6.2" font-size="3.8">D</tspan></text>
+  </g>
+  <g transform="translate(-27.9 32.3)">
+    <ellipse cx="56.7" cy="-7.2" rx="2.8" ry="2.5" fill="#e6e6e6" stroke="#000" stroke-width=".1"/>
+    <text transform="scale(1.0246 .97603)" x="53.9" y="-6" font-family="sans-serif" font-size="10.3" stroke-width=".3" style="line-height:1.25" xml:space="preserve"><tspan x="53.9" y="-6" font-size="3.8">C</tspan></text>
+  </g>
+  <g transform="translate(-34.7 30.8)">
+    <ellipse cx="50.2" cy="-13.2" rx="2.8" ry="2.5" fill="#e6e6e6" stroke="#000" stroke-width=".1"/>
+    <text transform="scale(1.0246 .97603)" x="47.7" y="-12.2" font-family="sans-serif" font-size="10.3" stroke-width=".3" style="line-height:1.25" xml:space="preserve"><tspan x="47.7" y="-12.2" font-size="3.8">E</tspan></text>
+  </g>
+
+  </g>
+</svg>

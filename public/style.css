@@ -1,140 +1,62 @@
-html{
-  color:grey;
-}
-
-div {
+* {
   box-sizing:border-box;
 }
-
-button {
-  margin:5px;
+.hexkey{
+  overflow:visible;
+  transform:translate(60px, 60px);
 }
-
-input {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  margin: 0;
-  margin-top: 3px;
-  text-align:center;
-  font-size: 27px;
-  background:none;
-  outline-width: 0;
-  color:#666;
+.outline{
+  transform:translateY(-2.6px);
+  fill:#f5ac3f;
+  fill-opacity:1; 
+  stroke:#000;
+  stroke-width:.4;
 }
-input.middle:focus {}
-
-#sudoku_solver_shell  {}
-#grid {
-  /* -- width: 700px; --*/
-  margin: 30px;
-  /* border: 3px solid grey; */
-  display: inline-block
+.node{
+  cursor:pointer;
 }
-
-.cell_shell{
-  position:relative;
-  margin: 0px;
-  margin-left: -1px;
-  width: 44.3px;
-  height: 40px;
-  overflow: hidden;
-  border: 1px solid grey;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  display:inline-block;
-  text-align:center;
+.node circle{
+  cx:0;
+  cy:0;
+  r:3.5;
 }
-
-.cell_shell.patternmap_background{
-  background-color:#e8f1f3;
+.node text{
+  user-select: none;
+  font-family:kefa;
+  font-size:4; 
+  text-anchor:middle;
+  transform:translateY(1.3px);
 }
-
-.cell_shell.patternmap_same{
-  background-color: #c3d9e6;
+.node text tspan{ 
+  font-size:3.8;
 }
-
-.cell_shell.patternmap_hinted{
-  background-color:#eeffcc;
+.node.one{
+  transform:translate(16px, 0px);
 }
-
-.cell_shell.selected, .cell_shell.selected.patternmap_background {
-  background-color:#fbe69b;
+.one circle{
+  fill:#000;
 }
-
-.valueDiv{
-  position: absolute;
-  display:none;
-  width: 100%;
-  height:inherit;
-  font-family: helvetica;
-  font-size:28px;
-  align-items : center;
-  justify-content: center;
+.one text{
+  fill:#fff;
 }
-
-.hasValue .valueDiv{
-  display:flex;
+.node.two{
+  transform:translate(2.8px, 7px);
 }
-
-.marks{
-  display:flex;
-  position: absolute;
-  width:100%;
+.node.three{
+  transform:translate(2.8px, 21.6px);
 }
-
-.pencilDiv{
-  font-size: 11px;
-  text-align: left;
-  padding: 2px;
-  position: absolute;
-  width:100%;
+.node.four{
+  transform:translate(28.9px, 7px);
 }
-
-.centerDiv{
-  font-size: 13px;
-  text-align: center;
-  padding: 2px;
-  position: absolute;
-  top:14px;
-  width:100%;
+.node.five{
+  transform:translate(28.9px, 21.6px);
 }
-
-.hasValue .marks{
-  display:none
+.node.six{
+  transform:translate(16px, 29.6px);
 }
-
-.highlight_button{
-  border:2px solid orange;
+.node.seven{
+  transform:translate(16px, 14px);
 }
-
-.invalidCell{
-  background-color:red;
-}
-.invalidCell input{
-  color:white;
-}
-.hintedCell, .hintedCell.row-bottom, .hintedCell.row-top, .hintedCell.column-right, .hintedCell.column-left{
-  border-width:3px;
-  border-top-color: #62d5e2;
-  border-bottom-color: #62d5e2;
-  border-left-color: #62d5e2;
-  border-right-color: #62d5e2;
-}
-
-.hintedCell input{
-  color:#237179;
-}
-
-.hintValueRelatedCell{
-  background-color:#d3faff;;
-}
-.hintBackgroundCell{
-  background-color:#eeeeee;
-}
-.column-right{
-  border-right:3px solid grey;
-}
-.row-bottom{
-  border-bottom:3px solid grey;
+text{
+  text-anchor:middle;
 }
