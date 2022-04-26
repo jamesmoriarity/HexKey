@@ -1,9 +1,19 @@
 import React from "react"
 export class Music{
   static majorScaleIntervals:number[] = [2,2,1,2,2,2,1]
-  static notes:string[] = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-  static C:number = 0
-  static F:number = 5
+  static notes:string[] = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
+  static C:number   = 0
+  static Db:number  = 1
+  static D:number   = 2
+  static Eb:number  = 3
+  static E:number   = 4
+  static F:number   = 5
+  static Gb:number  = 6
+  static G:number   = 7
+  static Ab:number  = 8
+  static A:number   = 9
+  static Bb:number  = 10
+  static B:number   = 11
 }
 export interface HexNodeProps{
   position:number, 
@@ -11,18 +21,19 @@ export interface HexNodeProps{
 }
 export function HexNode(props:HexNodeProps){
   const nodeNames:string[] = ['one', 'two', 'three', 'four', 'five', 'six', 'seven']
-  return <g onClick={(e)=>{console.log('yep!')}}  className={'node ' + nodeNames[props.position]}>
-          <circle fill="#e6e6e6" stroke="#000" strokeWidth=".1"/>
+  const handleClick = function(e:React.MouseEvent){
+    console.log('yep!')
+  }
+  return <g onClick={handleClick}  className={'node ' + nodeNames[props.position]}>
+          <circle/>
           <text>{Music.notes[props.rootNote]}</text>
         </g>
 }
-
-
 class BaseComponent extends React.Component {
  	constructor(props:any){
  		super(props)
  	}
-  tonic:number = Music.F
+
   getKeyScale = (tonic:number)=>{
     let scale:number[] = [tonic]
     let currentNote:number = tonic
@@ -43,7 +54,8 @@ class BaseComponent extends React.Component {
     return <svg className="hexkey" width="256" height="280" viewBox="0 0 32 35" xmlns="http://www.w3.org/2000/svg">
               <g className="hex">
                 <path className="outline" d="M15.8 32.6 2.7 25V10l13.1-7.6L28.9 10V25z"/>
-                <g className="nodes">{this.getHexNodes(Music.F)}</g>
+                
+                <g className="nodes">{this.getHexNodes(Music.Eb)}</g>
               </g>
             </svg>
   }

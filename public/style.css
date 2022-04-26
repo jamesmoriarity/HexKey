@@ -19,6 +19,12 @@
   cx:0;
   cy:0;
   r:3.5;
+  fill:#e6e6e6; 
+  stroke:#555; 
+  stroke-width:.1;
+}
+.node.hilite circle{
+  fill:red;
 }
 .node text{
   user-select: none;
