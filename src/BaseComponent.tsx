@@ -50,12 +50,40 @@ class BaseComponent extends React.Component {
     });
     return nodes
   }
+  getPoints = () => {
+    return "0 -10, 8.66 -5, 8.66 5, 0 10, -8.66 5, -8.66 -5"
+  }
   render (){
-    return <svg className="hexkey" width="256" height="280" viewBox="0 0 32 35" xmlns="http://www.w3.org/2000/svg">
-              <g className="hex">
-                <path className="outline" d="M15.8 32.6 2.7 25V10l13.1-7.6L28.9 10V25z"/>
-                
+    return <svg className="hexkey" width="300" height="300" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <g className="hex00">
+                <polygon className="outline" 
+                  points={this.getPoints()}
+                  />
                 <g className="nodes">{this.getHexNodes(Music.Eb)}</g>
+              </g>
+              <g className="hex01">
+                <polygon className="outline" 
+                  points={this.getPoints()}
+                  />
+                <g className="nodes">{this.getHexNodes(Music.Gb)}</g>
+              </g>
+              <g className="hex02">
+                <polygon className="outline" 
+                  points={this.getPoints()}
+                  />
+                <g className="nodes">{this.getHexNodes(Music.A)}</g>
+              </g>
+              <g className="hex10">
+                <polygon className="outline" 
+                  points={this.getPoints()}
+                  />
+                <g className="nodes">{this.getHexNodes(Music.Bb)}</g>
+              </g>
+              <g className="hex11">
+                <polygon className="outline" 
+                  points={this.getPoints()}
+                  />
+                <g className="nodes">{this.getHexNodes(Music.Db)}</g>
               </g>
             </svg>
   }

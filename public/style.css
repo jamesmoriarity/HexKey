@@ -1,12 +1,45 @@
 * {
   box-sizing:border-box;
 }
+.questionPosition{
+  top: 80px;
+  position: absolute;
+  left: 50px;
+  font-size: 25px;
+  text-align: center;
+  width:600px;
+  border:1px solid black;
+}
+#pocket2{
+  position:absolute;
+  top:0px;
+  left:0px;
+}
+#pocket{
+  position:absolute;
+  top:0px;
+  left:400px;
+}
 .hexkey{
   overflow:visible;
   transform:translate(60px, 60px);
 }
+.hex00{
+  transform:translate(20px, 20px);
+}
+.hex01{
+  transform:translate(37.2px, 20px);
+}
+.hex02{
+  transform:translate(54.4px, 20px);
+}
+.hex10{
+  transform:translate(28.6px, 35px);
+}
+.hex11{
+  transform:translate(45.8px, 35px);
+}
 .outline{
-  transform:translateY(-2.6px);
   fill:#f5ac3f;
   fill-opacity:1; 
   stroke:#000;
@@ -18,10 +51,8 @@
 .node circle{
   cx:0;
   cy:0;
-  r:3.5;
+  r:2.5;
   fill:#e6e6e6; 
-  stroke:#555; 
-  stroke-width:.1;
 }
 .node.hilite circle{
   fill:red;
@@ -29,15 +60,12 @@
 .node text{
   user-select: none;
   font-family:kefa;
-  font-size:4; 
+  font-size:3; 
   text-anchor:middle;
-  transform:translateY(1.3px);
+  transform:translateY(1px);
 }
 .node text tspan{ 
   font-size:3.8;
-}
-.node.one{
-  transform:translate(16px, 0px);
 }
 .one circle{
   fill:#000;
@@ -45,23 +73,29 @@
 .one text{
   fill:#fff;
 }
+.node.one{
+  transform:translate(0px, -10px);
+}
 .node.two{
-  transform:translate(2.8px, 7px);
+  transform:translate(-8.66px, -5px);
 }
 .node.three{
-  transform:translate(2.8px, 21.6px);
+  transform:translate(-8.66px, 5px);
 }
 .node.four{
-  transform:translate(28.9px, 7px);
+  transform:translate(8.66px, -5px);
 }
 .node.five{
-  transform:translate(28.9px, 21.6px);
+  transform:translate(8.66px, 5px);
 }
 .node.six{
-  transform:translate(16px, 29.6px);
+  transform:translate(0px, 10px);
 }
 .node.seven{
-  transform:translate(16px, 14px);
+  transform:translate(0px, 0px);
+}
+.node.seven circle{
+  opacity:0.5;
 }
 text{
   text-anchor:middle;
