@@ -11,11 +11,8 @@ export interface HexNodeProps{
 export function HexNode(props:HexNodeProps){
     const nodeNames:string[] = ['one', 'two', 'three', 'four', 'five', 'six', 'seven']
     const handleClick = function(e:React.MouseEvent){
-      console.log('yep!')
       props.onClick(props.position)
     }
-
-    
     const showNoteNameLabel = function(props:HexNodeProps){
         return(Music.notes[props.rootNote])
     }

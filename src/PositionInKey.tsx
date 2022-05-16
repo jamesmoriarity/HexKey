@@ -48,10 +48,13 @@ class PositionInKey extends React.Component {
      console.log('nextNoteName', nextNoteName)
      this.setState({currentAnswer:nextNoteName, userAnswer:null, currentPosition:nextPosition})
    }
-
+   capitalizeFirstLetter = (s:string)=> {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
   onInput = (event:any) => {
     console.log('onInput', event.target.value)
-    let noteName:string = event.target.value
+    let chars
+    let noteName:string = this.capitalizeFirstLetter(event.target.value)
     this.setState({userAnswer:noteName})
   }
  

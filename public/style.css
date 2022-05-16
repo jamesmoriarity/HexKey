@@ -48,7 +48,7 @@
 .node circle{
   cx:0;
   cy:0;
-  r:2.5;
+  r:2.0;
   fill:#e6e6e6; 
 }
 .node.hilite circle{
