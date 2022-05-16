@@ -29,19 +29,18 @@ class PositionInKey extends React.Component {
        setTimeout(this.nextQuestion, 1000)
      }
    }
+   getRandomNonRepeatingPosition = () => {
+    let positions:number[] = []
+    for(let i = 1; i < 7; i++){
+      if(i !== this.state.currentPosition){
+       positions.push(i)
+      }
+    }
+    let nextPositionIndex:number = Math.floor(Math.random() * positions.length)
+    return positions[nextPositionIndex]     
+   }
    nextQuestion = () => {
-     // exclude currentNumber
-     let positions:number[] = []
-     console.log("this.state.currentPosition", this.state.currentPosition)
-     for(let i = 1; i < 7; i++){
-       if(i !== this.state.currentPosition){
-        positions.push(i)
-       }
-     }
-     console.log(positions)
-     let nextPositionIndex:number = Math.floor(Math.random() * positions.length)
-     console.log('nextPositionIndex', nextPositionIndex)
-     let nextPosition:number = positions[nextPositionIndex]
+     let nextPosition:number = this.getRandomNonRepeatingPosition()
      console.log('nextPosition', nextPosition)
      let nextNoteNum:number = this.state.scale[nextPosition]
      console.log('nextNoteNum', nextNoteNum)
@@ -58,10 +57,13 @@ class PositionInKey extends React.Component {
  
   getSubtitle = ():string => {
     if(this.state.userAnswer === null){
-      return ''
+      return ' - '
     }
     if(this.state.currentAnswer === this.state.userAnswer){
       return 'correct'
+    }
+    if(this.state.currentAnswer.includes(this.state.userAnswer)){
+        return ' - '
     }
     return 'incorrect'
   }

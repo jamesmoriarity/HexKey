@@ -36,7 +36,7 @@ class SingleHex extends React.Component {
    nextQuestion = () => {
      // exclude currentNumber
      let a:number[] = []
-     for(let i = 0; i < 7; i++){
+     for(let i = 1; i < 7; i++){
        if(i !== this.state.currentNumber){
          a.push(i)
        }
@@ -78,14 +78,18 @@ class SingleHex extends React.Component {
   getPoints = () => {
     return "0 -10, 8.66 -5, 8.66 5, 0 10, -8.66 5, -8.66 -5"
   }
-  getSubtitle = ():string => {
+  getUserAnswerReply = ():string => {
     if(this.state.currentAnswer === null){
-      return 'click the circle'
+      return ''
     }
     if(this.state.currentAnswer === this.state.currentNumber){
-      return 'correct'
+      return 'correct.'
     }
-    return 'incorrect'
+    return 'incorrect. try again.'
+  }
+  getInstruction = ():string => {
+    return 'click on position...'
+
   }
   getCurrentNumberLabel = ():number => {
     if(this.state.currentNumber){
@@ -95,8 +99,8 @@ class SingleHex extends React.Component {
   }
   render (){ return <div>
                       <div className="questionPosition">
-                        <div>{this.getSubtitle()}</div>
-                        <div>{this.getCurrentNumberLabel()}</div>
+                        <div>{this.getInstruction()} {this.getCurrentNumberLabel()}</div>
+                        <div>{this.getUserAnswerReply()}</div>
                       </div>
                       <svg className="hexkey" width="300" height="300" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                           <g className="hex00">

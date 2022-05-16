@@ -24,22 +24,26 @@ class SingleHexNoteNames extends SingleHex {
    }
   getCurrentNote = () => {
     let scale:number[] = this.getKeyScale()
-
-    console.log('getCurrentNote', scale)
     let num:number = (this.state.currentNumber) ? this.state.currentNumber : 0
     let note:number = scale[num]
-    console.log('getCurrentNote', note)
     return Music.notes[note]
   }
-  getSubtitle = ():string => {
-    if(this.state.currentAnswer === null){
-      return 'click the note' 
-    }
-    if(this.state.currentAnswer === this.state.currentNumber){
-      return 'correct'
-    }
-    return 'incorrect'
+  answerIsCorrect = ():boolean => {
+      return (this.state.currentAnswer === this.state.currentNumber)
   }
+  getInstruction = ():string => {
+        return 'click the note...' + this.getCurrentNote()
+    }
+    getUserAnswerReply = ():string => {
+        if(!this.state.currentAnswer){
+            return ' '
+        }
+        if(this.answerIsCorrect()){
+            return 'correct'
+          }
+        return 'incorrect'
+    }
+
   getHexNodeDisplayType = (index:number)=>{
     if(index === 0){
         return this.state.displayType
@@ -56,7 +60,7 @@ class SingleHexNoteNames extends SingleHex {
   }
   render (){ return <div>
                       <div className="questionPosition">
-                          <div>hello
+                          <div>
                               <select value={this.state.tonic} onChange={this.onKeySelect}>
                                   <option value={8}>Ab</option>
                                   <option value={9}>A</option>
@@ -72,8 +76,8 @@ class SingleHexNoteNames extends SingleHex {
                                   <option value={7}>G</option>
                               </select>
                             </div>
-                        <div>{this.getSubtitle()}</div>
-                        <div>{this.getCurrentNote()}</div>
+                        <div>{this.getInstruction()}</div>
+                        <div>{this.getUserAnswerReply()}</div>
                       </div>
                       <svg className="hexkey" width="300" height="300" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                           <g className="hex00">
