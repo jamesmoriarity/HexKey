@@ -13,4 +13,13 @@ export class Music{
     static A:number   = 9
     static Bb:number  = 10
     static B:number   = 11
+    static getKeyScale = (tonic:number)=>{
+        let scale:number[] = [tonic]
+        let currentNote:number = tonic
+        for(let i:number = 0; i < 6; i++){
+          currentNote = (currentNote + Music.majorScaleIntervals[i]) % 12
+          scale.push(currentNote)
+        }
+        return scale
+      }
   }
