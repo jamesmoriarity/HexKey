@@ -37,10 +37,10 @@
   transform:translate(45.8px, 35px);
 }
 .outline{
-  fill:#f5ac3f;
+  fill:#e29820de;
   fill-opacity:1; 
-  stroke:#000;
-  stroke-width:.4;
+  stroke:rgb(49, 45, 40);
+  stroke-width:.2;
 }
 .node{
   cursor:pointer;
@@ -48,11 +48,16 @@
 .node circle{
   cx:0;
   cy:0;
-  r:2.0;
-  fill:#e6e6e6; 
+  r:2.20;
+  fill:rgb(216, 214, 214); 
+  stroke-width: .2px;
+  stroke:rgb(56, 54, 51);
 }
 .node.hilite circle{
-  fill:red;
+  fill:rgb(41, 36, 31);
+}
+.node.hilite text{
+  fill:#f5cc8bde;
 }
 .node text{
   user-select: none;
@@ -60,16 +65,12 @@
   font-size:3; 
   text-anchor:middle;
   transform:translateY(1px);
+  fill:rgb(66, 63, 58);
 }
 .node text tspan{ 
   font-size:3.8;
 }
-.one circle{
-  fill:#000;
-}
-.one text{
-  fill:#fff;
-}
+
 .node.one{
   transform:translate(0px, -10px);
 }
@@ -90,9 +91,6 @@
 }
 .node.seven{
   transform:translate(0px, 0px);
-}
-.node.seven circle{
-  opacity:0.5;
 }
 text{
   text-anchor:middle;

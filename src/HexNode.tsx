@@ -1,15 +1,16 @@
 import React from "react"
+import { PositionState } from "./HexKey"
 import { Music } from "./Music"
-import SingleHex, { SingleHexState } from "./SingleHex"
 
 export interface HexNodeProps{
-    displayType:number,
+    displayState:PositionState,
     position:number, 
     rootNote:number,
     onClick:Function
   }
 export function HexNode(props:HexNodeProps){
-    const nodeNames:string[] = ['one', 'two', 'three', 'four', 'five', 'six', 'seven']
+  console.log('props', props)  
+  const nodeNames:string[] = ['one', 'two', 'three', 'four', 'five', 'six', 'seven']
     const handleClick = function(e:React.MouseEvent){
       props.onClick(props.position)
     }
@@ -19,19 +20,20 @@ export function HexNode(props:HexNodeProps){
     const showNumberLabel = function(props:HexNodeProps){
         return(props.position + 1)
     }
-    const getLabel = function(props:HexNodeProps){
-      if (props.displayType === SingleHexState.DISPLAY_NONE) {
+    const getLabel = function(){
+      if (!props.displayState.labelDisplay) {
           return ''
       }
-      if (props.displayType === SingleHexState.DISPLAY_NUMBER) {
+      if (props.displayState.labelType === PositionState.LABELTYPE_NUMBER) {
           return showNumberLabel(props)
       }
-      if (props.displayType === SingleHexState.DISPLAY_NOTENAME) {
+      if (props.displayState.labelType === PositionState.LABELTYPE_NOTENAME) {
           return showNoteNameLabel(props)
       }
     }
-    return <g onClick={handleClick}  className={'node ' + nodeNames[props.position]}>
+    let hiliteClass:string = (props.displayState.hilite) ? ' hilite' : ' glitch '
+    return <g onClick={handleClick}  className={'node ' + nodeNames[props.position] + hiliteClass}>
             <circle/>
-            <text>{getLabel(props)}</text>
+            <text>{getLabel()}</text>
           </g>
   }

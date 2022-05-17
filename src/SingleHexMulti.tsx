@@ -1,11 +1,9 @@
 import React from "react"
+import { HexKey, PositionState } from "./HexKey"
 import { HexNode } from "./HexNode"
 import { Music } from "./Music"
 
 export class SingleHexMultiState{
-  static DISPLAY_NONE:number = -1
-  static DISPLAY_NUMBER:number = 0
-  static DISPLAY_NOTENAME:number = 1
   currentNumbers:number[]
   currentAnswers:number[]
   lastAnswer:number | null
@@ -26,9 +24,12 @@ class SingleHexMulti extends React.Component {
   state:SingleHexMultiState
  	constructor(props:any){
  		super(props)
-    this.state = new SingleHexMultiState(Music.G, SingleHexMultiState.DISPLAY_NUMBER)
-    this.state.currentNumbers = this.getNextSequence();
+        this.state = this.getState()
+        this.state.currentNumbers = this.getNextSequence();
  	}
+    getState = () => {
+        return new SingleHexMultiState(Music.G, PositionState.LABELTYPE_NUMBER)
+    }
     getNextSequence = () => {
         let sequences:number[][] = [[0,2,4], [1,3,5], [2,4,6], [3,5,0], [4,6,1], [5,0,2], [6,1,3]]
         return sequences[Math.floor(Math.random() * sequences.length) % 8]
@@ -39,7 +40,7 @@ class SingleHexMulti extends React.Component {
    componentDidUpdate = ()=>{
      if(this.answerIsCorrect()){
         console.log('all answers are present')
-        setTimeout(this.nextQuestion, 700)
+        setTimeout(this.nextQuestion, 1200)
      }
    }
    nextQuestion = () => {
@@ -58,25 +59,7 @@ class SingleHexMulti extends React.Component {
     }
   }
 
-
-  getHexNodeDisplayType = (index:number)=>{
-    let isAnAnswer:boolean =  this.state.currentAnswers.includes(index)
-    if(isAnAnswer){
-      return this.state.displayType
-    }
-    return SingleHexMultiState.DISPLAY_NONE
-  }
-  getHexNodes = ()=>{
-    console.log('getHexNodes')
-    let nodes:JSX.Element[] = []
-    this.state.scale.forEach((rootNote:number, index:number) => {
-      nodes.push(<HexNode displayType={this.getHexNodeDisplayType(index)} onClick={this.onNodeClick} position={index} rootNote={rootNote} key={index}/>)
-    });
-    return nodes
-  }
-  getPoints = () => {
-    return "0 -10, 8.66 -5, 8.66 5, 0 10, -8.66 5, -8.66 -5"
-  }
+ 
   getUserAnswerReply = ():string => {
     if(this.state.lastAnswer === null){
         return ''
@@ -102,20 +85,29 @@ class SingleHexMulti extends React.Component {
   getInstruction = ():string => {
     return 'click on multiple positions...  ' + this.getCurrentNumbersAsOneBasedPositions().join(' - ')
   }
-
+  getPositionStates = () => {
+      let states:PositionState[] = []
+      for(let positionIndex = 0; positionIndex < 7; positionIndex++){
+          let labelShouldDisplay:boolean = this.state.currentAnswers.includes(positionIndex)
+          let hilite:boolean = labelShouldDisplay
+          let state:PositionState = new PositionState(
+                                                hilite,
+                                                labelShouldDisplay, 
+                                                this.state.displayType)
+          
+          states.push(state)
+        }
+      return states
+  }
   render (){ return <div>
                       <div className="questionPosition">
                         <div>{this.getInstruction()}</div>
                         <div>{this.getUserAnswerReply()}</div>
                       </div>
-                      <svg className="hexkey" width="300" height="300" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                          <g className="hex00">
-                            <polygon className="outline" 
-                              points={this.getPoints()}
-                              />
-                            <g className="nodes">{this.getHexNodes()}</g>
-                          </g>
-                        </svg>
+                      <HexKey
+                        tonic={this.state.tonic}
+                        positionStates={this.getPositionStates()}
+                        onPositionClick={this.onNodeClick} />
                     </div>
   }
 }

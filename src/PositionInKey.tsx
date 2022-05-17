@@ -1,7 +1,6 @@
 import React from "react"
 import { HexNode } from "./HexNode"
 import { Music } from "./Music"
-import { SingleHexState } from "./SingleHex"
 
 export class PositionInKeyState{
     currentPosition:number

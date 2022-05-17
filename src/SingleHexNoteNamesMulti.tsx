@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react"
+import { HexKey, PositionState } from "./HexKey"
 import { HexNode, HexNodeProps } from "./HexNode"
 import { Music } from "./Music"
 import SingleHexMulti, { SingleHexMultiState } from "./SingleHexMulti"
@@ -8,7 +9,11 @@ import SingleHexMulti, { SingleHexMultiState } from "./SingleHexMulti"
 class SingleHexNoteNamesMulti extends SingleHexMulti {
     constructor(props:any){
         super(props)
-        this.state.displayType = SingleHexMultiState.DISPLAY_NOTENAME
+        this.state = this.getState()
+        this.state.currentNumbers = this.getNextSequence();
+    }
+    getState = () => {
+        return new SingleHexMultiState(Music.G, PositionState.LABELTYPE_NOTENAME)
     }
     getCurrentNumbersAsNotes = () => {
         let notes:string[] = this.state.currentNumbers.map((elm:number)=>{
@@ -21,7 +26,7 @@ class SingleHexNoteNamesMulti extends SingleHexMulti {
     }
     onKeySelect = (e:any) => {
         console.log(e.target.value)
-        let newState:SingleHexMultiState = new SingleHexMultiState(e.target.value, SingleHexMultiState.DISPLAY_NOTENAME)
+        let newState:SingleHexMultiState = new SingleHexMultiState(e.target.value, PositionState.LABELTYPE_NOTENAME)
         this.setState({...newState})
     }
     render (){ return <div>
@@ -44,15 +49,11 @@ class SingleHexNoteNamesMulti extends SingleHexMulti {
                             </div>
                         <div>{this.getInstruction()}</div>
                         <div>{this.getUserAnswerReply()}</div>
-                        </div>
-                        <svg className="hexkey" width="300" height="300" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <g className="hex00">
-                            <polygon className="outline" 
-                                points={this.getPoints()}
-                                />
-                            <g className="nodes">{this.getHexNodes()}</g>
-                            </g>
-                        </svg>
+                        </div>                      
+                        <HexKey
+                            tonic={this.state.tonic}
+                            positionStates={this.getPositionStates()}
+                            onPositionClick={this.onNodeClick} />
                     </div>
     }
 }
