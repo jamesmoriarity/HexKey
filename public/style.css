@@ -1,28 +1,40 @@
 * {
   box-sizing:border-box;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 .questionPosition{
   top: 80px;
-  position: absolute;
   left: 50px;
-  font-size: 25px;
+  font-size: 16px;
   text-align: center;
   width:600px;
   margin:20px;
+  padding-bottom: 40px;
+  margin:auto;
+}
+.questionPosition div{
+  height:40px;
+}
+.answer-reply{
+  height:40px;
+}
+button.note-choice{
+  font-size:25px;
 }
 .pocket{
   position: relative;
-  height: 600px;
   background-color: #cfcccc;
   padding: 10px;
   margin: 20px;
 }
 .hexkey{
   overflow:visible;
-  transform:translate(60px, 60px);
+  display:block;
+  margin:auto;
+  margin-bottom:40px;
 }
 .hex00{
-  transform:translate(20px, 20px);
+  transform:translate(50%, 50%);
 }
 .hex01{
   transform:translate(37.2px, 20px);
@@ -37,10 +49,14 @@
   transform:translate(45.8px, 35px);
 }
 .outline{
-  fill:#e29820de;
+  fill:#b8ac9ede;
   fill-opacity:1; 
   stroke:rgb(49, 45, 40);
   stroke-width:.2;
+  transition: fill 1s;
+}
+.outline.completed{
+  fill:#e29820de;
 }
 .node{
   cursor:pointer;
@@ -52,19 +68,26 @@
   fill:rgb(216, 214, 214); 
   stroke-width: .2px;
   stroke:rgb(56, 54, 51);
+  transition: fill 1s;
 }
 .node.hilite circle{
   fill:rgb(41, 36, 31);
 }
 .node.hilite text{
-  fill:#f5cc8bde;
+  fill:#f5bb5dde;
+}
+.node.hilite.hiliteSelected circle{
+  fill:#666;
+}
+.node.hilite.hiliteSelected text{
+  fill:rgb(250, 247, 247);
 }
 .node text{
   user-select: none;
   font-family:kefa;
-  font-size:3; 
+  font-size:2.5; 
   text-anchor:middle;
-  transform:translateY(1px);
+  transform:translateY(0.75px);
   fill:rgb(66, 63, 58);
 }
 .node text tspan{ 

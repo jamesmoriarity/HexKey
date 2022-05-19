@@ -92,6 +92,7 @@ class SingleHexMulti extends React.Component {
           let hilite:boolean = labelShouldDisplay
           let state:PositionState = new PositionState(
                                                 hilite,
+                                                false,
                                                 labelShouldDisplay, 
                                                 this.state.displayType)
           
@@ -101,13 +102,14 @@ class SingleHexMulti extends React.Component {
   }
   render (){ return <div>
                       <div className="questionPosition">
-                        <div>{this.getInstruction()}</div>
-                        <div>{this.getUserAnswerReply()}</div>
+                        <div className='instruction'>{this.getInstruction()}</div>
+                        <div className="answer-reply">{this.getUserAnswerReply()}</div>
                       </div>
                       <HexKey
                         tonic={this.state.tonic}
                         positionStates={this.getPositionStates()}
-                        onPositionClick={this.onNodeClick} />
+                        onPositionClick={this.onNodeClick} 
+                        completed={false}/>
                     </div>
   }
 }

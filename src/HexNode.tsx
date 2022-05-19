@@ -8,8 +8,7 @@ export interface HexNodeProps{
     rootNote:number,
     onClick:Function
   }
-export function HexNode(props:HexNodeProps){
-  console.log('props', props)  
+export function HexNode(props:HexNodeProps){ 
   const nodeNames:string[] = ['one', 'two', 'three', 'four', 'five', 'six', 'seven']
     const handleClick = function(e:React.MouseEvent){
       props.onClick(props.position)
@@ -21,6 +20,9 @@ export function HexNode(props:HexNodeProps){
         return(props.position + 1)
     }
     const getLabel = function(){
+      if (props.displayState.labelType === PositionState.LABELTYPE_QUESTION) {
+          return '?'
+      }
       if (!props.displayState.labelDisplay) {
           return ''
       }
@@ -31,7 +33,10 @@ export function HexNode(props:HexNodeProps){
           return showNoteNameLabel(props)
       }
     }
-    let hiliteClass:string = (props.displayState.hilite) ? ' hilite' : ' glitch '
+    let hiliteClass:string = (props.displayState.hilite) ? ' hilite' : ' '
+    if(props.displayState.hiliteSelected){
+      hiliteClass += ' hiliteSelected'
+    }
     return <g onClick={handleClick}  className={'node ' + nodeNames[props.position] + hiliteClass}>
             <circle/>
             <text>{getLabel()}</text>
