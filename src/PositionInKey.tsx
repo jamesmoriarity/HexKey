@@ -1,4 +1,5 @@
 import React from "react"
+import { playChordByPosition } from "./guitarsounds"
 import { HexNode } from "./HexNode"
 import { Labels } from "./Labels"
 import { Music } from "./Music"
@@ -27,9 +28,10 @@ class PositionInKey extends React.Component {
         this.state = new PositionInKeyState(Music.G)
  	}
    componentDidUpdate = ()=>{
-     if(this.state.currentAnswer === this.state.userAnswer){
-       setTimeout(this.nextQuestion, 1000)
-     }
+    if(this.state.currentAnswer === this.state.userAnswer){
+      playChordByPosition(this.state.scale, this.state.currentPosition)
+      setTimeout(this.nextQuestion, 1000)
+    }
    }
    getRandomNonRepeatingPosition = () => {
     let positions:number[] = []

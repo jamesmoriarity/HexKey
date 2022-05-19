@@ -1,4 +1,5 @@
 import React from "react"
+import { playChord, playChordByPosition } from "./guitarsounds"
 import { HexKey, PositionState } from "./HexKey"
 import { HexNode } from "./HexNode"
 import { Music } from "./Music"
@@ -31,7 +32,7 @@ class SingleHexMulti extends React.Component {
         return new SingleHexMultiState(Music.G, PositionState.LABELTYPE_NUMBER)
     }
     getNextSequence = () => {
-        let sequences:number[][] = [[0,2,4], [1,3,5], [2,4,6], [3,5,0], [4,6,1], [5,0,2], [6,1,3]]
+        let sequences:number[][] = [[0,1,2,3,4,5,6,0,1,2,3,4,5,6]] //, [1,3,5], [2,4,6], [3,5,0], [4,6,1], [5,0,2], [6,1,3]]
         return sequences[Math.floor(Math.random() * sequences.length) % 8]
     }
     answerIsCorrect = () => {
@@ -50,9 +51,11 @@ class SingleHexMulti extends React.Component {
 
   onNodeClick = (position:number) => {
     if(position === this.state.currentNumbers[this.state.currentAnswers.length]){
-        let newAnswers:number[] = [...this.state.currentAnswers]
-        newAnswers.push(position)
-        this.setState({currentAnswers:newAnswers, currentAnswer:position, lastAnswer:position})
+      const noteNum:number = this.state.scale[position]
+      playChordByPosition(this.state.scale, position)
+      let newAnswers:number[] = [...this.state.currentAnswers]
+      newAnswers.push(position)
+      this.setState({currentAnswers:newAnswers, currentAnswer:position, lastAnswer:position})
     }
     else{
         this.setState({lastAnswer:position})

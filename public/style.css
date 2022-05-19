@@ -26,6 +26,8 @@ button.note-choice{
   background-color: #cfcccc;
   padding: 10px;
   margin: 20px;
+  border:2px solid #7d7474;
+  border-radius:10px;
 }
 .hexkey{
   overflow:visible;
@@ -51,7 +53,7 @@ button.note-choice{
 .outline{
   fill:#b8ac9ede;
   fill-opacity:1; 
-  stroke:rgb(49, 45, 40);
+  stroke:#7d7474;
   stroke-width:.2;
   transition: fill 1s;
 }
@@ -67,7 +69,7 @@ button.note-choice{
   r:2.20;
   fill:rgb(216, 214, 214); 
   stroke-width: .2px;
-  stroke:rgb(56, 54, 51);
+  stroke:#685e5e;
   transition: fill 1s;
 }
 .node.hilite circle{
@@ -98,16 +100,16 @@ button.note-choice{
   transform:translate(0px, -10px);
 }
 .node.two{
-  transform:translate(-8.66px, -5px);
-}
-.node.three{
-  transform:translate(-8.66px, 5px);
-}
-.node.four{
   transform:translate(8.66px, -5px);
 }
-.node.five{
+.node.three{
   transform:translate(8.66px, 5px);
+}
+.node.four{
+  transform:translate(-8.66px, -5px);
+}
+.node.five{
+  transform:translate(-8.66px, 5px);
 }
 .node.six{
   transform:translate(0px, 10px);

@@ -3,6 +3,7 @@ import { HexKey, PositionState } from "./HexKey"
 import { NotesSelect } from "./NotesSelect"
 import { Music } from "./Music"
 import { NoteButtons } from "./NoteButtons"
+import { playChordByPosition } from "./guitarsounds"
 
 export class KeyBuilderState{
   currentAnswers:number[]
@@ -59,9 +60,13 @@ export class KeyBuilder extends React.Component {
         console.log(e.target.value)
         this.setTonic(parseInt(e.target.value))
     }
+    playCompletionChord = () => {
+      playChordByPosition(this.state.scale, 0)
+    }
    componentDidUpdate = ()=>{
      if(this.keyIsCompleted()){
-       setTimeout(this.resetKey, 1500)
+      setTimeout(this.resetKey, 1500)
+      setTimeout(this.playCompletionChord, 900)
      }
     if(this.state.autoSelectNext){
       let nextPosition:number = this.getNextPosition()
@@ -93,7 +98,8 @@ export class KeyBuilder extends React.Component {
     return labelShouldDisplay
   }
   keyIsCompleted = () => {
-    return (this.state.currentAnswers.length === this.state.scale.length)
+    const completed:boolean = (this.state.currentAnswers.length === this.state.scale.length)
+    return completed
   }
   getPositionStates = () => {
       let states:PositionState[] = []
@@ -116,6 +122,7 @@ export class KeyBuilder extends React.Component {
     if(this.state.selectedPosition > -1){
       let answeredCorrectly:boolean = (noteNum === this.state.scale[this.state.selectedPosition])
       if(answeredCorrectly){
+        playChordByPosition(this.state.scale, this.state.selectedPosition)
         let newAnswers:number[] = [...this.state.currentAnswers]
         newAnswers.push(noteNum)
         if(this.state.autoSelectNext){
