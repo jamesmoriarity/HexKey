@@ -3,7 +3,7 @@ import { Music } from "./Music";
 
 const context = new AudioContext();
 let dampening = 0.99;
-function pluck(frequency:any) { //:AudioNode
+function pluck(frequency:number) { //:AudioNode
   const pluck = context.createScriptProcessor(4096, 0, 1);
   const signalPeriodInSamples = Math.round(context.sampleRate / frequency);
   const currentSignal = new Float32Array(signalPeriodInSamples);
@@ -59,12 +59,11 @@ function strum(frets:any, stringCount = 6, stagger = 15) {
   dampening = 0.99;
   // Connect our strings to the sink
   const dst = context.destination;
-  for (let index = 0; index < stringCount; index++) {
-    if (Number.isFinite(frets[index])) {
+  const filterFrets:number[] = frets.filter((fret:number) => Number.isFinite(fret));
+  for (let index = 0; index < filterFrets.length-1; index++) {
       setTimeout(() => {
-        pluck(getFrequency(index, frets[index])).connect(dst);
+        pluck(getFrequency(index, filterFrets[index])).connect(dst);
       }, stagger * index);
-    }
   }
 }
 
