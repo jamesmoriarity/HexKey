@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react"
 import { HexKey, PositionState } from "./HexKey"
+import { HexKeyHelperNotes } from "./HexKeyHelperNotes"
 import { HexNode, HexNodeProps } from "./HexNode"
 import { Music } from "./Music"
 import { NotesSelect } from "./NotesSelect"
@@ -31,19 +32,40 @@ class SingleHexNoteNamesMulti extends SingleHexMulti {
         let newState:SingleHexMultiState = new SingleHexMultiState(val, PositionState.LABELTYPE_NOTENAME)
         this.setState({...newState})
     }
+    getHelper = () => {
+        if(!this.state.showHelper){ return null}
+        return <HexKeyHelperNotes 
+          activeArrows={[]}
+          tonic={this.state.tonic}
+          positionStates={this.getPositionStates()}
+          onPositionClick={this.onNodeClick} 
+          completed={false}/>
+      }
+
+      toggleShowHelper = () => {
+        this.setState({showHelper:!this.state.showHelper})
+      }
     render (){ return <div>
                         <div className="questionPosition">
                             <div>
                             <NotesSelect tonic={this.state.tonic} onChange={this.onKeySelect}/>
                             </div>
                         <div>{this.getInstruction()}</div>
+                        <div>
+                              <input type="checkbox" 
+                                    checked={this.state.showHelper} 
+                                    onChange={this.toggleShowHelper}/> Show Hint - Sequence Pattern
+
+                            </div>
                         <div>{this.getUserAnswerReply()}</div>
                         </div>                      
                         <HexKey
+                            activeArrows={[]}
                             tonic={this.state.tonic}
                             positionStates={this.getPositionStates()}
                             onPositionClick={this.onNodeClick}
                             completed={false} />
+                      <div className="hexkeyhelper">{this.getHelper()}</div>
                     </div>
     }
 }

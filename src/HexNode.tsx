@@ -8,8 +8,12 @@ export interface HexNodeProps{
     rootNote:number,
     onClick:Function
   }
+export class HexNodeNames{
+  static asStrings:string[] = ['one', 'two', 'three', 'four', 'five', 'six', 'seven']
+}
+
 export function HexNode(props:HexNodeProps){ 
-  const nodeNames:string[] = ['one', 'two', 'three', 'four', 'five', 'six', 'seven']
+  const nodeNames:string[] = HexNodeNames.asStrings
     const handleClick = function(e:React.MouseEvent){
       props.onClick(props.position)
     }

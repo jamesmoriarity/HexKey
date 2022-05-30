@@ -1,4 +1,5 @@
 import React from "react"
+import { HexIntervalArrow } from "./HexIntervalArrow"
 import { HexNode } from "./HexNode"
 import { Music } from "./Music"
 export class PositionState{
@@ -20,13 +21,18 @@ export interface HexKeyProps{
     tonic:number
     positionStates:PositionState[]
     onPositionClick:Function
+    activeArrows:number[]
     completed:boolean | null
 }
 
 export class HexKey extends React.Component {
     props!:HexKeyProps
+    width:number
+    height:number
     constructor(props:HexKeyProps){
         super(props);
+        this.width = 300
+        this.height = 300
     }
     componentDidUpdate = () => {
         console.log('componentDidUpdate')
@@ -53,13 +59,28 @@ export class HexKey extends React.Component {
         let modifier:string = (this.props.completed) ? ' completed' : ''
         return (className + modifier)
     }
+    getArrows = () => {
+        return this.props.activeArrows.map((position:number) =>{
+            return <HexIntervalArrow position={position} key={position}/>
+        })
+    }
+    getClassName = () => {
+        return 'hexkey'
+    }
+    getLabels = (): null | JSX.Element => {
+        return null
+    }
     render = () => {
-        return  <svg className="hexkey" width="300" height="300" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        return  <svg className={this.getClassName()} width={this.width} height={this.height} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <g className="hex00">
-                    <polygon className={this.getOutlineClassName()} 
-                        points={this.getPoints()}
-                        />
-                    <g className="nodes">{this.getHexNodes()}</g>
+                        <polygon className={this.getOutlineClassName()} 
+                            points={this.getPoints()}
+                            />
+                        <g className="interval-labels">{this.getLabels()}</g>
+                        <g className="interval-arrows">
+                            {this.getArrows()}
+                        </g>
+                        <g className="nodes">{this.getHexNodes()}</g>
                     </g>
                 </svg>
     }

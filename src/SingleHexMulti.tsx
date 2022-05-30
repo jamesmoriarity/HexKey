@@ -1,6 +1,7 @@
 import React from "react"
-import { playChord, playChordByPosition } from "./guitarsounds"
+import { playChord, playChordByPosition, playOctaveByPosition } from "./guitarsounds"
 import { HexKey, PositionState } from "./HexKey"
+import { HexKeyHelperPositions } from "./HexKeyHelperPositions"
 import { HexNode } from "./HexNode"
 import { Music } from "./Music"
 
@@ -11,6 +12,8 @@ export class SingleHexMultiState{
   displayType:number
   tonic:number
   scale:number[]
+  itemsPerQuestion:number
+  showHelper:boolean
   constructor(tonic:number, displayType:number){
     this.currentNumbers = []
     this.currentAnswers = []
@@ -18,6 +21,8 @@ export class SingleHexMultiState{
     this.displayType = displayType
     this.tonic = tonic
     this.scale = Music.getKeyScale(this.tonic)
+    this.itemsPerQuestion = 1
+    this.showHelper = true
   }
 }
 
@@ -31,9 +36,19 @@ class SingleHexMulti extends React.Component {
     getState = () => {
         return new SingleHexMultiState(Music.G, PositionState.LABELTYPE_NUMBER)
     }
-    getNextSequence = () => {
-        let sequences:number[][] = [[0,1,2,3,4,5,6,0,1,2,3,4,5,6]] //, [1,3,5], [2,4,6], [3,5,0], [4,6,1], [5,0,2], [6,1,3]]
-        return sequences[Math.floor(Math.random() * sequences.length) % 8]
+    getNextSequence = ():number[] => {
+        let options:number[] = []
+        for(let i:number = 0; i < 7; i++){
+          if(i != this.state.currentAnswers[0] || this.state.itemsPerQuestion !== 1){
+            options.push(i)
+          }
+        }
+        let sequence:number[] = []
+        for(let j = 0; j < this.state.itemsPerQuestion; j++){
+          const index:number = Math.floor(Math.random() * options.length)
+          sequence.push(options[index])
+        }
+        return(sequence)
     }
     answerIsCorrect = () => {
         return (this.state.currentAnswers.length === this.state.currentNumbers.length)
@@ -52,7 +67,8 @@ class SingleHexMulti extends React.Component {
   onNodeClick = (position:number) => {
     if(position === this.state.currentNumbers[this.state.currentAnswers.length]){
       const noteNum:number = this.state.scale[position]
-      playChordByPosition(this.state.scale, position)
+      //playChordByPosition(this.state.scale, position)
+      playOctaveByPosition(this.state.scale, position)
       let newAnswers:number[] = [...this.state.currentAnswers]
       newAnswers.push(position)
       this.setState({currentAnswers:newAnswers, currentAnswer:position, lastAnswer:position})
@@ -70,7 +86,7 @@ class SingleHexMulti extends React.Component {
     let currAnswers:number[] = this.state.currentAnswers
     let isLastAnswerCorrect:boolean = (this.state.lastAnswer === currAnswers[currAnswers.length-1])
     if(currAnswers.length === this.state.currentNumbers.length){
-        return 'sequence completed.'
+        return (this.state.itemsPerQuestion === 1) ? 'correct.' : 'sequence completed.'
     }
     if(isLastAnswerCorrect){
         return 'correct so far...'
@@ -103,16 +119,38 @@ class SingleHexMulti extends React.Component {
         }
       return states
   }
+  getHelper = () => {
+    if(!this.state.showHelper){ return null}
+    return <HexKeyHelperPositions 
+      activeArrows={[]}
+      tonic={this.state.tonic}
+      positionStates={this.getPositionStates()}
+      onPositionClick={this.onNodeClick} 
+      completed={false}/>
+  }
+  toggleShowHelper = () => {
+    this.setState({showHelper:!this.state.showHelper})
+  }
   render (){ return <div>
                       <div className="questionPosition">
-                        <div className='instruction'>{this.getInstruction()}</div>
+                          <div>
+                            <input type="checkbox" 
+                                  checked={this.state.showHelper} 
+                                  onChange={this.toggleShowHelper}/> Show Hint - Sequence Pattern
+
+                          </div>
+                        <div className='instruction'>
+                          {this.getInstruction()}
+                        </div>
                         <div className="answer-reply">{this.getUserAnswerReply()}</div>
                       </div>
                       <HexKey
+                        activeArrows={[]}
                         tonic={this.state.tonic}
                         positionStates={this.getPositionStates()}
                         onPositionClick={this.onNodeClick} 
                         completed={false}/>
+                      <div className="hexkeyhelper">{this.getHelper()}</div>
                     </div>
   }
 }

@@ -3,7 +3,9 @@ import { HexKey, PositionState } from "./HexKey"
 import { NotesSelect } from "./NotesSelect"
 import { Music } from "./Music"
 import { NoteButtons } from "./NoteButtons"
-import { playChordByPosition } from "./guitarsounds"
+import { playChordByPosition, playOctaveByPosition } from "./guitarsounds"
+import HexKeyHelperNotes from "./HexKeyHelperNotes"
+import { HexKeyHelperArrows } from "./HexKeyHelperArrows"
 
 export class KeyBuilderState{
   currentAnswers:number[]
@@ -13,6 +15,7 @@ export class KeyBuilderState{
   selectedPosition:number
   autoSelectNext:boolean
   previousPosition:number
+  showHelper:boolean
   constructor(tonic:number){
     this.tonic = tonic
     this.scale = Music.getKeyScale(this.tonic)
@@ -21,12 +24,16 @@ export class KeyBuilderState{
     this.selectedPosition = -1
     this.previousPosition = -1
     this.autoSelectNext = true
+    this.showHelper = true
   }
 }
-
+export interface KeyBuilderProps{
+  
+}
 export class KeyBuilder extends React.Component {
   state:KeyBuilderState
- 	constructor(props:any){
+  props!:KeyBuilderProps
+ 	constructor(props:KeyBuilderProps){
  		super(props)
     this.state = this.getState(Music.G)
     if(this.state.autoSelectNext){
@@ -122,7 +129,7 @@ export class KeyBuilder extends React.Component {
     if(this.state.selectedPosition > -1){
       let answeredCorrectly:boolean = (noteNum === this.state.scale[this.state.selectedPosition])
       if(answeredCorrectly){
-        playChordByPosition(this.state.scale, this.state.selectedPosition)
+        playOctaveByPosition(this.state.scale, this.state.selectedPosition)
         let newAnswers:number[] = [...this.state.currentAnswers]
         newAnswers.push(noteNum)
         if(this.state.autoSelectNext){
@@ -154,13 +161,51 @@ export class KeyBuilder extends React.Component {
     let lastAnswer:number | null = (autoSelectState) ? -1 : this.state.lastAnswer
     this.setState({autoSelectNext:autoSelectState, lastAnswer:lastAnswer})
   }
-  render (){ return <div>
+  getActiveArrows = () => {
+    // return [0,1,2,3,4,5,6]
+    const position:number = this.state.selectedPosition
+    if(position > 0 && position < 6){
+      return [position]
+    }
+    return []
+  }
+  getArrowHelper = () => {
+    if(!this.state.showHelper){ return null}
+    let arrows = <HexKeyHelperArrows 
+      activeArrows={[0,1,2,3,4,5,6]}
+      tonic={this.state.tonic}
+      positionStates={this.getPositionStates()}
+      onPositionClick={this.onNodeClick} 
+      completed={false}/>
+    return arrows
+  }
+  getNoteHelper = () => {
+    if(!this.state.showHelper){ return null}
+    let notes = <HexKeyHelperNotes 
+      activeArrows={[]}
+      tonic={this.state.tonic}
+      positionStates={this.getPositionStates()}
+      onPositionClick={this.onNodeClick} 
+      completed={false}/>
+      return notes
+  }
+  toggleShowHelper = () => {
+    this.setState({showHelper:!this.state.showHelper})
+  }
+  render (){ return <div className="keybuilder">
                       <div className="questionPosition">
                             <div>
                               {this.getInstruction()}
                               <NotesSelect tonic={this.state.tonic} onChange={this.onKeySelect}/>
                               <button onClick={this.resetKey}>clear</button>
                               <input type="checkbox" checked={this.state.autoSelectNext} onChange={this.toggleAutoSelect}/> Autoselect Positions
+                            </div>
+
+                            <div>
+                              <input type="checkbox" 
+                                    checked={this.state.showHelper} 
+                                    onChange={this.toggleShowHelper}/> Show Hint - Sequence Pattern
+
                             </div>
                             <div>
                               <NoteButtons onClick={this.onInput} />
@@ -169,10 +214,15 @@ export class KeyBuilder extends React.Component {
 
                       </div>
                       <HexKey
+                        activeArrows={this.getActiveArrows()}
                         completed={this.keyIsCompleted()}
                         tonic={this.state.tonic}
                         positionStates={this.getPositionStates()}
                         onPositionClick={this.onNodeClick} />
+                      <div className="hexkeyhelper">
+                        {this.getArrowHelper()}
+                        {this.getNoteHelper()}
+                      </div>
                     </div>
   }
 }

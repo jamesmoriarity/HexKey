@@ -2,7 +2,7 @@ import { Chords } from "./Chords";
 import { Music } from "./Music";
 
 const context = new AudioContext();
-let dampening = 0.99;
+let dampening = 0.999;
 function pluck(frequency:number) { //:AudioNode
   const pluck = context.createScriptProcessor(4096, 0, 1);
   const signalPeriodInSamples = Math.round(context.sampleRate / frequency);
@@ -69,8 +69,8 @@ function strum(frets:any, stringCount = 6, stagger = 15) {
 
 function getFrequency(string:any, fret:any) {
   const A = 110;
-  const offsets = [-5, 0, 5, 10, 14, 19]; // These are how far guitar strings are tuned apart from A
-  return A * Math.pow(2, (fret + offsets[string]) / 12);
+  const stringTuningOffsets = [-5, 0, 5, 10, 14, 19]; // offsets relative to A
+  return A * Math.pow(2, (fret + stringTuningOffsets[string]) / 12);
 }
 
 function mute() {
@@ -90,6 +90,13 @@ export function playChordByPosition(scale:number[], position:number){
     const frets:number[] = chordArray[noteIndex]
     console.log('frets:' + frets )
     playChord(frets)
+}
+export function playOctaveByPosition(scale:number[], position:number){
+  let chords:Chords = new Chords()
+  const noteIndex:number = scale[position]
+  console.log('noteIndex', noteIndex)
+  const frets:number[] = chords.octave[noteIndex]
+  playChord(frets)
 }
 
 export function playChord(frets:any) {

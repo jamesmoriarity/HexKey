@@ -120,3 +120,97 @@ button.note-choice{
 text{
   text-anchor:middle;
 }
+
+.interval-arrow.one .interval-arrow-inner{
+  transform:rotate(90deg);
+}
+.interval-arrow.two .interval-arrow-inner{
+  transform:rotate(-150deg);
+}
+.interval-arrow.three .interval-arrow-inner{
+  transform:rotate(-90deg);
+}
+.interval-arrow.four .interval-arrow-inner{
+  transform:rotate(30deg);
+}
+.interval-arrow.five .interval-arrow-inner{
+  transform:rotate(-90deg);
+}
+.interval-arrow.six .interval-arrow-inner{
+  transform:rotate(-150deg);
+}
+.interval-arrow.seven .interval-arrow-inner{
+  transform:rotate(90deg);
+}
+.interval-arrow-shaft{
+  fill:#5b5353;
+  transform:translate(3.2px, -0.2px);
+}
+.interval-arrow{
+  visibility: visible;
+}
+.interval-arrow-head{
+  fill:#5b5353;
+  transform:translate(2.2px, -1px);
+}
+
+div.hexkeyhelper{
+  position:absolute;
+  left:80%;
+  top:10%;
+}
+div.keybuilder div.hexkeyhelper{
+  top:35%;
+}
+.hexkeyhelper .node{
+  cursor:default;
+}
+
+.hexkey.helper.arrows .interval-arrow-head{
+  fill:#5b5353;
+  transform:translate(0px, -1px);
+}
+
+.hexkey.helper.arrows .interval-arrow-shaft{
+  fill:#5b5353;
+  transform:translate(0.75px, -0.2px);
+}
+
+.hexkey.helper.arrows .nodes circle{
+  display:none;
+}
+
+.hexkey.helper .outline{
+  stroke-width:0px;
+}
+
+.hexkey.helper.arrows .interval-arrow.one polygon, .hexkey.helper.arrows  .interval-arrow.four polygon{
+  fill:#7d7474;
+}
+
+.interval-label{
+  font-size:3px;
+}
+.interval-label.one-two{
+  transform: translate(6px, -9px);
+}
+.interval-label.two-three{
+  transform: translate(12px, 0px);
+}
+.interval-label.three-four{
+  transform: translate(-3.5px, -3px);
+  fill:#685e5e;
+}
+.interval-label.four-five{
+  transform: translate(-11px, 1px);
+}
+.interval-label.five-six{
+  transform: translate(-6px, 11px);
+}
+.interval-label.six-seven{
+  transform: translate(2px, 6px);
+}
+.interval-label.seven-one{
+  transform: translate(2px, -3px);
+  fill:#685e5e;
+}

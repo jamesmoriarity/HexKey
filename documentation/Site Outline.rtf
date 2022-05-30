@@ -1,0 +1,148 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww25460\viewh16780\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs48 \cf0 Intro\
+	purpose: introduce the hexkey project : hex key musical geometry for your mind\'92s eye
+\fs24  [eye off Horus]\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx21806\ri-13168\pardirnatural\partightenfactor0
+
+\fs48 \cf0 	visual : cool intro motion nights sky, pyramid mountains, shift is perspective w/ parallax sun goes down night sky comes out 
+\fs24  [eye off Horus].   
+\fs48 Most of the stars fade but the key stars stay lit. Then the hexagonal lines \
+				connect the stars to show a series of hexkeys as the camera pans upward to just the sky.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx21806\ri-13168\pardirnatural\partightenfactor0
+\cf0 				transported to a plane of symbolic knowledge, as it goes sideways it turns into a card\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx21806\ri-13168\pardirnatural\partightenfactor0
+\cf0 				the card opens up -  leads to the look and feel of the tutorial, sepia parchment, 					hieroglyph-is icons (play the eqyptian thing lightly, play the geometry heavily)\
+\
+\
+Topics\
+	who its for: Visual thinkers looking to learn music theory in a geometric, pattern-based way. One that 	allows them to visualize musical information in real-time and see: \
+		The structure of each of the twelve keys; \
+		All seven of the relative keys contained within each key:  
+\fs36 e.g. C Major (Ionian), A Minor (Aeolian), D Dorian\'85 etc.
+\fs48 \
+		The position and role of each note and chord in each key; \
+		The basic formulas for generating all of a key\'92s chords and scales; \
+		The modes/scales that fit with each chord in a key.\
+		A macro-level map (aka The HexKeyMap) of all the keys and their harmonic relationships.   \
+		
+\fs36 (Essential for understanding key changes, borrowed chords, etc). \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx21806\ri-13168\pardirnatural\partightenfactor0
+
+\fs48 \cf0 HexKey Musical Geometry is a map for your mind\'92s eye - a head\'92s up display of sorts for staying musically oriented in any setting: \
+	playing to a backing track; \
+	jamming with other musicians; \
+	learning songs, writing songs;  \
+	analyzing music; \
+	watching instructional videos. \
+\
+HexKey will help you to learn faster, play better and be more musically adaptable. You\'92ll develop a better understanding of music theory terminology by seeing these terms as labels meant to describe patterns rather than formulas to create those patterns. \
+\
+For a visual learner, it will be substantially more difficult to learn the terminology first and then discover the underlying formulas and patterns they describe.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx21806\ri-13168\pardirnatural\partightenfactor0
+\cf0 \
+	patterns merged with other patterns create emergent patterns HexKey = 
+\fs36 (mjscl.interval + hexkey sequence) * m.alpha
+\fs48 \
+	modal triplets - polarity - major minor - odd even puzzle - 7th chord notes when connecting 7th nodes - 		relationships per side\
+	inverse key inside - enigmatic minor\
+Other symmetric scales, whole tone scale, Neapolitan minor.\
+Mandala designs\
+Process of learning: start with conceptual mode, functional mode, mastery mode: instant recall of all keys and the relationships between them.  Keep it in your mind\'92s eye.\
+Chord shapes within a key\
+Resolution chain within chord \
+Nashville numbering system\
+Information patterns vs. formulas vs. theory labels\
+Brain pattern matching skills\
+Macro map shows the guitar keys, strings \
+Transcribe songs in each key\
+Extended geometry - tonnetz maps, coltranes circles\
+We are always in a Key and we are always in a mode within that Key\
+	key provides the context we need to derive all the information related to a key\
+Chord helper pattern\
+Analogy of moving to fixed locations within a musical landscape\
+Analogy of a molecule\
+Key changing/coltranes\
+\
+Outside the key\
+	borrowed chords\
+	blues dom \
+	7ths\
+	dim7\
+\
+Information hierarchy \
+Key:\{ \
+	KeyScales: [full scale, pentatonic, blues], \
+	Modes: [\
+		Mode:\{\
+			name:modeNames[position]\
+			rootNote:fullScale[0], \
+			modalScale: scale =\
+			diatonic chords\{ \
+				triad: [1,3,5], 7th: [1,3,5,7], Sus2: [1,2,5], Sus4: [1,4,5], \
+				6th: [1,3,6], add9:[1,3,5,9(2)], add11[1,3,5,11(4), add13[1,3,5,6]\
+			\}\
+		]\
+\}\
+\
+Note.add = function(note, interval) \{ \
+	return (note + interval) % 12 \
+\}\
+Note.getName = function(note, interval = 0) \{ \
+	return Music.notes[Music.getNoteNum(note, interval)] \
+\}\
+Static Key.getScale(tonic)\
+Key.constructor(tonic)\{\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx21806\ri-13168\pardirnatural\partightenfactor0
+\cf0 	this.modes:Mode[] = this.getModes()\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx21806\ri-13168\pardirnatural\partightenfactor0
+\cf0 \}\
+Mode.Names = [\'91Ionian\'92,\'92Dorian\'92,\'92Phrygian\'92,\'92Lydian\'92,\'92Mixolydian\'92,\'92Aeolian\'92,\'92Locrian\'92]\
+Chord.Formulas = [[0,2,4], [0,2,4,6], [0,1,4], [0,3,4], [0,2,5], [0,2,4,8], [0,2,4,10], [0,2,4,12]\
+Chord.Types = [\'91Triad\'92, \'92Seventh\'92, \'91Sus2\'92, \'91Sus4\'92, \'91\'92Sixth\'92 Add9\'92, \'91Add11\'92, \'91Add13\'92]\
+Chord.formulaFromType(chordType) return chord.formulas[chord.types.indexOf(name)]\
+Chord.getNotes(modalscale, chordType) \{ \
+	formula = getFormula(chordType); \
+	notes = []; 		\
+	modalscale.forEach((n, i)=>\{if formula.includes(i)\{notes.push(modalscale[i]). \
+\}\
+Mode.getChord(name) return Chord.getNotes(this.modalscale, name)\
+	\
+Mode.constructor(tonic, position)\{\
+	this.position = position // 1 (0 based)\
+	this.name = Mode.Names[position]\
+	this.rootNote = Music.notes[Music.getNoteNum(tonic, position)]\
+	Mode.relativeModalFormula = [0123456]\
+	this.absoluteFormula = [1234560] // this.buildAbsoluteFormula\
+	this.modalscale = [defgabc] //this.buildModalScale()\
+	this.chordCategory = (position === 1 | 4 | 5) ? ChordCategories.Major : (position === 7) ? Diminished : Minor\
+\}\
+Mode.buildModalScale = () => \{\
+	 let scale = Key.getScale(this.tonic); \
+	let frontstub = scale.splice(0, position);   //chop off front, add it to end\
+	return scale.concat(frontstub)\
+\}\
+\
+Modes/positions - each modes personality, it\'92s comparative interval qualities\
+\
+Key relationship exercise - find the: 6th, minor 3rd, 4th, 5th, 3rd,  b6 relative to any key\
+\
+Derive each triad in the key [1,3,5] and all other chords \
+	(chord specifics) 7ths, augmented 7ths, sec.dom., \
+Sort out relative modal scales (arpeggios) from fixed key scales (like pentatonic and blues)\
+\
+Build sequencer key, build interval key\
+\
+Youtube visual companion -  greatly improve learning retention\
+\
+\
+	}

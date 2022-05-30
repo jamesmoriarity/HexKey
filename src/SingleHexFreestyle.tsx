@@ -56,6 +56,7 @@ class SingleHexFreestyle extends React.Component {
                         <div><NotesSelect onChange={this.onKeySelect} tonic={this.state.tonic} /></div>
                       </div>
                       <HexKey
+                        activeArrows={[]}
                         tonic={this.state.tonic}
                         positionStates={this.getPositionStates()}
                         onPositionClick={this.onNodeClick} 
