@@ -6,7 +6,8 @@ import SingleHexFreestyle from "./SingleHexFreestyle"
 import PositionInKey from "./PositionInKey"
 import KeyBuilder from "./KeyBuilder"
 import { Angles } from "./Angles"
-
+import { Field } from "./Field/Field"
+/* 
 ReactDOM.render(
     React.createElement(SingleHexMulti, null), document.getElementById('pocket0'))
     ReactDOM.render(
@@ -16,8 +17,8 @@ ReactDOM.render(
 ReactDOM.render(
     React.createElement(PositionInKey, null), document.getElementById('pocket3'))
 ReactDOM.render(
-    React.createElement(KeyBuilder, null), document.getElementById('pocket4'))
+    React.createElement(KeyBuilder, null), document.getElementById('pocket4')) */
 
-
-    console.log(Angles.getAngleFromPoints(10,10, 0,0))
+    ReactDOM.render(
+        React.createElement(Field, {radius:40, bounds:[]}), document.getElementById('pocket0'))
     

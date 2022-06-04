@@ -51,7 +51,7 @@ export class HexKey extends React.Component {
         })
         return nodes
     }
-    getPoints = () => {
+    static getPoints = () => {
         return "0 -10, 8.66 -5, 8.66 5, 0 10, -8.66 5, -8.66 -5"
       }
     getOutlineClassName = () => {
@@ -74,7 +74,7 @@ export class HexKey extends React.Component {
         return  <svg className={this.getClassName()} width={this.width} height={this.height} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <g className="hex00">
                         <polygon className={this.getOutlineClassName()} 
-                            points={this.getPoints()}
+                            points={HexKey.getPoints()}
                             />
                         <g className="interval-labels">{this.getLabels()}</g>
                         <g className="interval-arrows">
