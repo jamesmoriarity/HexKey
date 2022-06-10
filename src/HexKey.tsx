@@ -35,7 +35,7 @@ export class HexKey extends React.Component {
         this.height = 300
     }
     componentDidUpdate = () => {
-        console.log('componentDidUpdate')
+        // console.log('componentDidUpdate')
     }
     getHexNodes = () => {
         let nodes:JSX.Element[] = []

@@ -226,17 +226,18 @@ div.keybuilder div.hexkeyhelper{
   transform: translateY(8px);
   cursor:pointer;
   pointer-events: none;
+  opacity:0.3;
 }
 .field-hexagon{
   fill:rgb(185, 183, 183);
-  stroke:rgb(131, 129, 129);
-  stroke-width:0px;
-  opacity:0.31;
+  stroke:rgb(255, 255, 255);
+  stroke-width:2px;
+  opacity:0.45;
 }
 .field-note-name{
   pointer-events: none;
   transform: translateY(4px);
-  fill:rgb(102, 101, 101);
+  fill:rgb(255, 255, 255);
   font-size: 12px;
 }
 .field-note-triangle{
@@ -248,15 +249,26 @@ div.keybuilder div.hexkeyhelper{
   pointer-events: none;
 }
 .field-note-circle{
-  fill:rgb(196, 196, 196);  
-  stroke:rgb(78, 77, 77);
-  stroke-width:1px;
-  opacity:1;
+  fill:rgb(196, 196, 196);
+  opacity:0.8;
+  stroke:white;
+  stroke-width:2px;
+}
+.petal{
+  opacity:0.4;
+  stroke:white;
+  stroke-width:2px;
+}
+.petal.unselected{
+  opacity:0;
+}
+.petal.selected{
+  opacity:0.5;
 }
 
 .A{fill:#ff0000;}
 .Bb{fill:#ff8000;}
-.B{fill:#ffff00;}
+.B{fill:#edd305;}
 .C{fill:#80ff00;}
 .Db{fill:#00ff00;}
 .D{fill:#00ff80}

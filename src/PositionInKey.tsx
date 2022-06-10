@@ -45,9 +45,9 @@ class PositionInKey extends React.Component {
    }
    nextQuestion = () => {
      let nextPosition:number = this.getRandomNonRepeatingPosition()
-     console.log('nextPosition', nextPosition)
+     // console.log('nextPosition', nextPosition)
      let nextNoteNum:number = this.state.scale[nextPosition]
-     console.log('nextNoteNum', nextNoteNum)
+     // console.log('nextNoteNum', nextNoteNum)
      this.setState({currentAnswer:nextNoteNum, userAnswer:-1, currentPosition:nextPosition})
    }
   onInput = (event:any) => {
@@ -75,7 +75,7 @@ class PositionInKey extends React.Component {
     return this.state.userAnswer
   }
   onKeySelect = (e:any) => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     let newState:PositionInKeyState = new PositionInKeyState(parseInt(e.target.value), 1)
     this.setState({...newState})
   }

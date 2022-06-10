@@ -13,7 +13,7 @@ export class HexKeyHelperArrows extends HexKey {
         this.height = 100
     }
     getArrows = () => {
-        console.log('getArrows')
+        // console.log('getArrows')
         let arrows:JSX.Element[] = []
         for(let i = 0; i < 7; i++){
             arrows.push(<HexIntervalArrow position={i} key={i}/>)

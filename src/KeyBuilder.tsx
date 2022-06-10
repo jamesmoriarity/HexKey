@@ -64,7 +64,7 @@ export class KeyBuilder extends React.Component {
         return new KeyBuilderState(tonic)
     }
     onKeySelect = (e:any) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         this.setTonic(parseInt(e.target.value))
     }
     playCompletionChord = () => {
@@ -83,7 +83,7 @@ export class KeyBuilder extends React.Component {
     }
    }
    componentDidMount = () => {
-    console.log('componentDidMount')
+    // console.log('componentDidMount')
    }
    getInstruction = () => {
        return 'Enter all seven notes in the key of:'
@@ -124,7 +124,7 @@ export class KeyBuilder extends React.Component {
       return states
   }
   onInput = (event:any) => {
-    console.log('onInput', event.target.value)
+    // console.log('onInput', event.target.value)
     let noteNum:number = parseInt(event.target.value)
     if(this.state.selectedPosition > -1){
       let answeredCorrectly:boolean = (noteNum === this.state.scale[this.state.selectedPosition])

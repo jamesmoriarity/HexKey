@@ -92,7 +92,7 @@ export class FieldKey{
         this._note = Music.notes[tonic]
         this.index = index
         this.display = true
-        this.active = true
+        this.active = false
     }
     onKeyClick = () => {
         this.parentField.onKeyClick(this)

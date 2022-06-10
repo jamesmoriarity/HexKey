@@ -55,7 +55,7 @@ class SingleHexMulti extends React.Component {
     }
    componentDidUpdate = ()=>{
      if(this.answerIsCorrect()){
-        console.log('all answers are present')
+        // console.log('all answers are present')
         setTimeout(this.nextQuestion, 1200)
      }
    }

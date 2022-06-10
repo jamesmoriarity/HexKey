@@ -86,9 +86,9 @@ export function playChordByPosition(scale:number[], position:number){
     let chords:Chords = new Chords()
     let chordLabel:string = (minors.includes(position)) ? 'minor' : (majors.includes(position)) ? 'major' : 'diminished'
     let chordArray = (chordLabel === 'minor') ? chords.minor : (chordLabel === 'major') ? chords.major : chords.diminished
-    console.log('playing chord:' + Music.notes[noteIndex] + chordLabel )
+    // ('playing chord:' + Music.notes[noteIndex] + chordLabel )
     const frets:number[] = chordArray[noteIndex]
-    console.log('frets:' + frets )
+    // console.log('frets:' + frets )
     playChord(frets)
 }
 export function playOctaveByPosition(scale:number[], position:number){

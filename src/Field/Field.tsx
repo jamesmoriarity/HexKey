@@ -3,7 +3,7 @@ import { Coordinates } from "../Coordinates";
 import { FieldKey } from "./FieldKey";
 import { FieldKeyComp } from "./FieldKeyComp";
 import { FieldNote } from "./FieldNote";
-import { FieldNoteComp } from "./FieldNoteComp";
+import { FieldNoteComp, FieldNoteCompEven, FieldNoteCompOdd, FieldNoteCompSeventh } from "./FieldNoteComp";
 export interface FieldProps{
     radius:number
     bounds:number[]
@@ -31,8 +31,8 @@ export class Field extends React.Component{
         super(props)
         this.state = new FieldState()
         this.keyLimit = 2096
-        this.rowLimit = 40
-        this.columnLimit = 12
+        this.rowLimit = 3
+        this.columnLimit = 5
         this.origin = new Coordinates(100,50)
         this.build()
     }
@@ -93,8 +93,26 @@ export class Field extends React.Component{
         }
         return null
     }
+    toggleSelectOfNote = (note:FieldNote) => {
+        let exNote:FieldNote | null = this.getExistingNote(note.origin)
+        if(exNote !== null){
+            exNote.selected = !exNote.selected
+            let newNotes:FieldNote[] = [...this.state.notes]
+            this.setState({notes:newNotes})
+        }
+    }
+    toggleSelectOfNotePetal = (note:FieldNote, position:number) => {
+        console.log('toggleSelectOfNotePetal')
+        let exNote:FieldNote | null = this.getExistingNote(note.origin)
+        if(exNote !== null){
+            console.log('exNote not null')
+            exNote.petalStates[position].selected = !exNote.petalStates[position].selected
+            let newNotes:FieldNote[] = [...this.state.notes]
+            this.setState({notes:newNotes})
+        }
+    }
     buildNote = (key:FieldKey, keyPosition:number):FieldNote => {
-        let note:FieldNote =  new FieldNote([key], [keyPosition])
+        let note:FieldNote =  new FieldNote([key], [keyPosition], this)
         let existingNote:FieldNote | null = this.getExistingNote(note.origin)
         if(existingNote){ // use existing note
             existingNote.keys.set(keyPosition, key)
@@ -164,7 +182,12 @@ export class Field extends React.Component{
     }
     getNotes = ():JSX.Element[] => {
         let notes:JSX.Element[] = this.state.notes.map((note:FieldNote, index:number) => {
-            return <FieldNoteComp {...note.toProps()} key={index}/>
+            if(note.isEven){
+                return <FieldNoteCompEven {...note} key={index}/>
+            }
+            else if(note.isSeventh){
+                return <FieldNoteCompSeventh {...note} key={index}/>}
+            return <FieldNoteCompOdd {...note} key={index}/>
         })
         return notes
     }
@@ -172,8 +195,8 @@ export class Field extends React.Component{
         return   <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
                     <g className="fieldContainer" transform="translate(0 0)">
                         <g className="field">
-                            <g className="field-notes">{this.getNotes()}</g>
                             <g className="field-keys">{this.getKeys()}</g>
+                            <g className="field-notes">{this.getNotes()}</g>
                         </g>
                     </g>
                 </svg>

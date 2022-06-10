@@ -27,7 +27,7 @@ class SingleHexNoteNamesMulti extends SingleHexMulti {
         return 'click on multiple positions... ' + this.getCurrentNumbersAsNotes().join('-')
     }
     onKeySelect = (e:any) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         let val:number = parseInt(e.target.value)
         let newState:SingleHexMultiState = new SingleHexMultiState(val, PositionState.LABELTYPE_NOTENAME)
         this.setState({...newState})
