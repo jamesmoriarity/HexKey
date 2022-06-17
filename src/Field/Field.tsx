@@ -6,7 +6,6 @@ import { FieldNote } from "./FieldNote";
 import { FieldNoteComp, FieldNoteCompEven, FieldNoteCompOdd, FieldNoteCompSeventh } from "./FieldNoteComp";
 export interface FieldProps{
     radius:number
-    bounds:number[]
 }
 class FieldState{
     keys:FieldKey[]
@@ -30,9 +29,9 @@ export class Field extends React.Component{
     constructor(props:FieldProps){
         super(props)
         this.state = new FieldState()
-        this.keyLimit = 2096
-        this.rowLimit = 3
-        this.columnLimit = 5
+        this.keyLimit = 332
+        this.rowLimit = 11
+        this.columnLimit = 11
         this.origin = new Coordinates(100,50)
         this.build()
     }
@@ -42,19 +41,6 @@ export class Field extends React.Component{
 
     showKeys = () => {
         let newKeys:FieldKey[] = [...this.state.keys]
-/*         newKeys[0].display = true
-        newKeys[1].display = true
-        newKeys[2].display = true
-        newKeys[3].display = true
-        newKeys[4].display = true
-        newKeys[5].display = true
-        newKeys[6].display = true
-        newKeys[7].display = true
-        newKeys[8].display = true
-        newKeys[9].display = true
-        newKeys[12].display = true
-        newKeys[13].display = true */
-        // newKeys[14].display = true
         this.setState({keys:newKeys})
     }
     build = () => {
@@ -94,25 +80,25 @@ export class Field extends React.Component{
         return null
     }
     toggleSelectOfNote = (note:FieldNote) => {
-        let exNote:FieldNote | null = this.getExistingNote(note.origin)
+        let newNotes:FieldNote[] = [...this.state.notes]
+        let exNote:FieldNote = newNotes[note.index]
         if(exNote !== null){
             exNote.selected = !exNote.selected
-            let newNotes:FieldNote[] = [...this.state.notes]
             this.setState({notes:newNotes})
         }
     }
     toggleSelectOfNotePetal = (note:FieldNote, position:number) => {
         console.log('toggleSelectOfNotePetal')
-        let exNote:FieldNote | null = this.getExistingNote(note.origin)
+        let newNotes:FieldNote[] = [...this.state.notes]
+        let exNote:FieldNote | null = newNotes[note.index]
         if(exNote !== null){
             console.log('exNote not null')
             exNote.petalStates[position].selected = !exNote.petalStates[position].selected
-            let newNotes:FieldNote[] = [...this.state.notes]
             this.setState({notes:newNotes})
         }
     }
     buildNote = (key:FieldKey, keyPosition:number):FieldNote => {
-        let note:FieldNote =  new FieldNote([key], [keyPosition], this)
+        let note:FieldNote =  new FieldNote([key], [keyPosition], this, this.state.notes.length)
         let existingNote:FieldNote | null = this.getExistingNote(note.origin)
         if(existingNote){ // use existing note
             existingNote.keys.set(keyPosition, key)

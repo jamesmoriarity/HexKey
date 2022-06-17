@@ -220,19 +220,22 @@ div.keybuilder div.hexkeyhelper{
   fill:red;
 }
 .field-key-label{
-  font-size:30px;
-  font-weight:bold;
-  fill:#ffffff;
-  transform: translateY(8px);
-  cursor:pointer;
+  font-size: 33px;
+  font-weight: bold;
+  fill: #ffffff;
+  transform: translateY(12px);
+  cursor: pointer;
   pointer-events: none;
-  opacity:0.3;
+  opacity: 0.3;
 }
 .field-hexagon{
   fill:rgb(185, 183, 183);
   stroke:rgb(255, 255, 255);
   stroke-width:2px;
-  opacity:0.45;
+  opacity:0.1;
+}
+.field-hexagon.active{
+  opacity:0.55;
 }
 .field-note-name{
   pointer-events: none;
@@ -250,14 +253,14 @@ div.keybuilder div.hexkeyhelper{
 }
 .field-note-circle{
   fill:rgb(196, 196, 196);
-  opacity:0.8;
+  opacity:1;
   stroke:white;
-  stroke-width:2px;
+  stroke-width:1px;
 }
 .petal{
   opacity:0.4;
   stroke:white;
-  stroke-width:2px;
+  stroke-width:0px;
 }
 .petal.unselected{
   opacity:0;

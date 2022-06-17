@@ -6,6 +6,7 @@ import { NoteButtons } from "./NoteButtons"
 import { playChordByPosition, playOctaveByPosition } from "./guitarsounds"
 import HexKeyHelperNotes from "./HexKeyHelperNotes"
 import { HexKeyHelperArrows } from "./HexKeyHelperArrows"
+import { HexKeyHelperPositions } from "./HexKeyHelperPositions"
 
 export class KeyBuilderState{
   currentAnswers:number[]
@@ -123,6 +124,21 @@ export class KeyBuilder extends React.Component {
         }
       return states
   }
+  getNumberPositionStates = () => {
+    let states:PositionState[] = []
+    for(let positionIndex = 0; positionIndex < 7; positionIndex++){
+        let labelShouldDisplay:boolean = true
+        let hilite:boolean = labelShouldDisplay
+        let state:PositionState = new PositionState(
+                                              hilite,
+                                              false,
+                                              labelShouldDisplay, 
+                                              PositionState.LABELTYPE_NUMBER)
+
+        states.push(state)
+      }
+    return states
+}
   onInput = (event:any) => {
     // console.log('onInput', event.target.value)
     let noteNum:number = parseInt(event.target.value)
@@ -189,6 +205,17 @@ export class KeyBuilder extends React.Component {
       completed={false}/>
       return notes
   }
+  getNumberHelper = () => {
+    if(!this.state.showHelper){ return null}
+    let notes = <HexKeyHelperPositions 
+      activeArrows={[]}
+      tonic={this.state.tonic}
+      positionStates={this.getNumberPositionStates()}
+      onPositionClick={this.onNodeClick} 
+      completed={false}/>
+      return notes
+  }
+
   toggleShowHelper = () => {
     this.setState({showHelper:!this.state.showHelper})
   }
@@ -221,7 +248,8 @@ export class KeyBuilder extends React.Component {
                         onPositionClick={this.onNodeClick} />
                       <div className="hexkeyhelper">
                         {this.getArrowHelper()}
-                        {this.getNoteHelper()}
+                        {this.getNumberHelper()}
+                        {/* this.getNoteHelper() */}
                       </div>
                     </div>
   }

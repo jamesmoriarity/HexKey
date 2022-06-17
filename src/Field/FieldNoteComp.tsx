@@ -57,10 +57,17 @@ export class FieldNoteComp extends React.Component{
     makePetal = (points:string, mode:string, position:number) => {
         let classNames:string[] = ['petal', mode, this.props._noteName, this.getPetalSelectedClass(position)]
         let className:string =classNames.join(' ')
-        if(this.props.selected){ 
+        if(this.props.selected && this.props.getParentKeys()[position]?.active){ 
             return <g className={className}><polygon onClick={(e)=>{this.onPetalClick(position)}} points={points}/></g>
         }
         return null   
+    }
+    getRadius = () => {
+        return this.props.parentField.props.radius
+    }
+    getLabel = () => {
+        if(this.props.displayType === FieldNote.displayType_Note) return this.props._noteName
+        if(this.props.displayType === FieldNote.displayType_Number) return this.props.index 
     }
     render(){
         if(!this.shouldShow()){return null}
@@ -69,7 +76,7 @@ export class FieldNoteComp extends React.Component{
                     <g className='field-note'>
                         <g> {this.getPetals()}</g>
                         <g transform={this.getTransform()}>
-                            <circle onClick={this.onClick} className={this.getCircleClassName()} r={10} cy={0} cx={0}/>
+                            <circle onClick={this.onClick} className={this.getCircleClassName()} r={this.getRadius()/4} cy={0} cx={0}/>
                             <text className="field-note-name">{this.props._noteName}</text>
                         </g>
                     </g>
@@ -78,23 +85,28 @@ export class FieldNoteComp extends React.Component{
 }
 
 export class FieldNoteCompEven extends FieldNoteComp{
-    getDorianKey = () => { return this.props.getParentKeys()[0]}
-    getLydianKey = () => { return this.props.getParentKeys()[1]}
-    getAeolianKey = () => { return this.props.getParentKeys()[2]}
+    getDorianPoint = () => {  
+        let x:number = this.props.origin.x - (this.getRadius() * .866)
+        let y:number = this.props.origin.y + (this.getRadius()/2)
+        return new Coordinates(x,y)
+    }
+    getLydianPoint = () => {  
+        let x:number = this.props.origin.x + (this.getRadius() * .866)
+        let y:number = this.props.origin.y + (this.getRadius()/2)
+        return new Coordinates(x,y)
+    }
+    getAeolianPoint = () => {  
+        let x:number = this.props.origin.x
+        let y:number = this.props.origin.y - this.getRadius()
+        return new Coordinates(x,y)
+    }
     constructor(props:FieldNote){
         super(props)
     }
     getPetals = ():JSX.Element | null => {
-        let lyd:FieldKey | null = this.getLydianKey()
-        let aeo:FieldKey | null = this.getAeolianKey() 
-        let dor:FieldKey | null = this.getDorianKey()
-        if(!dor || !lyd || !aeo){
-            console.log('missing key')
-            return null
-        }
-        let d:Coordinates = dor.origin
-        let l:Coordinates = lyd.origin
-        let a:Coordinates = aeo.origin
+        let d:Coordinates = this.getDorianPoint()
+        let l:Coordinates = this.getLydianPoint()
+        let a:Coordinates = this.getAeolianPoint()
         let dl:Coordinates = new Coordinates((d.x + l.x)/2, (d.y + l.y)/2)
         let la:Coordinates = new Coordinates((l.x + a.x)/2, (l.y + a.y)/2)
         let ad:Coordinates = new Coordinates((a.x + d.x)/2, (a.y + d.y)/2)
@@ -111,21 +123,26 @@ export class FieldNoteCompEven extends FieldNoteComp{
 }
 
 export class FieldNoteCompOdd extends FieldNoteComp{
-    getIonianKey = () => { return this.props.getParentKeys()[0]}
-    getPhrygianKey = () => { return this.props.getParentKeys()[1]}
-    getMixolydianKey = () => { return this.props.getParentKeys()[2]}
+    getIonianPoint = () => { 
+        let x:number = this.props.origin.x
+        let y:number = this.props.origin.y + this.getRadius()
+        return new Coordinates(x,y)
+    }
+    getPhrygianPoint = () => {  
+        let x:number = this.props.origin.x - (this.getRadius() * .866)
+        let y:number = this.props.origin.y - (this.getRadius()/2)
+        return new Coordinates(x,y)
+    }
+    getMixolydianPoint = () => {  
+        let x:number = this.props.origin.x + (this.getRadius() * .866)
+        let y:number = this.props.origin.y - (this.getRadius()/2)
+        return new Coordinates(x,y)
+    }
     getPetals = ():JSX.Element | null => { 
         if(!this.props.selected){return null}
-        let io:FieldKey| null = this.getIonianKey()
-        let ph:FieldKey| null = this.getPhrygianKey()
-        let mx:FieldKey| null = this.getMixolydianKey()
-        if(!io || !ph || !mx){
-            console.log('missing key')
-            return null
-        }
-        let i:Coordinates = io.origin
-        let p:Coordinates = ph.origin
-        let m:Coordinates = mx.origin
+        let i:Coordinates = this.getIonianPoint()
+        let p:Coordinates = this.getPhrygianPoint()
+        let m:Coordinates = this.getMixolydianPoint()
         let ip:Coordinates = new Coordinates((i.x + p.x)/2, (i.y + p.y)/2)
         let im:Coordinates = new Coordinates((i.x + m.x)/2, (i.y + m.y)/2)
         let pm:Coordinates = new Coordinates((p.x + m.x)/2, (p.y + m.y)/2)

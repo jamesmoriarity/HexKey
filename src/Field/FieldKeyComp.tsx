@@ -48,7 +48,7 @@ export class FieldKeyComp extends React.Component{
         return <text className="field-key-label">{this.props._note}</text>
     }
     getClassName = () => {
-        return "field-hexagon " + this.props._note
+        return "field-hexagon "  + ((this.props.active) ? ' active' : '')
     }
     render(){
         if(this.state.visible === false || !this.props.display){return null}

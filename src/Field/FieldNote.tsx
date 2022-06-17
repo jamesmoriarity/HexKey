@@ -23,7 +23,19 @@ export class FieldNote{
     selected:boolean
     active:boolean
     parentField:Field
-    constructor(seedKeys:FieldKey[] = [], positions:number[] = [], parentField:Field){
+    displayType:number
+    index:number
+    static displayType_Note:number = 0
+    static displayType_Number:number = 1
+    static displayType_Question:number = 2
+    constructor(
+            seedKeys:FieldKey[] = [], 
+            positions:number[] = [], 
+            parentField:Field, 
+            index:number,
+            displayType:number = FieldNote.displayType_Note
+            ){
+        this.index = index
         this.isSeventh = (positions[0] === 6)
         this.isEven = ((positions[0]) % 2 !== 0 && !this.isSeventh)
         this.keys = this.buildEmptyKeys()
@@ -38,11 +50,15 @@ export class FieldNote{
         this.selected = false
         this.active = false
         this.parentField = parentField
+        this.displayType = displayType
     } 
+    getDefaultPetalState = () => {
+        return new PetalState(false, false)
+    }
     getPetalStates = () => {
         let petalStates:PetalState[] = []
         this.getParentKeys().forEach((key:FieldKey | null)=>{
-            petalStates.push(new PetalState())
+            petalStates.push(this.getDefaultPetalState())
         })
         return petalStates
     }
